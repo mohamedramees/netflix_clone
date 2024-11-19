@@ -56,6 +56,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                 Stack(
                   children: [
                     Card(
+                      color: Colors.black,
                       child: Container(
                         height: size.height * 0.6,
                         decoration: BoxDecoration(

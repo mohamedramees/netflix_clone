@@ -61,10 +61,11 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           ClipRRect(
             borderRadius: BorderRadius.circular(6),
-            child: Container(
-              color: Colors.blue,
+            child: Image.asset(
+              'assets/avataaar.avif',
               height: 27,
               width: 27,
+              fit: BoxFit.cover,
             ),
           ),
           const SizedBox(width: 20),

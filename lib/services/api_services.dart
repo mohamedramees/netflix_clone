@@ -17,6 +17,7 @@ var key = "?api_key=$apiKey";
 late String endPoint;
 
 class ApiServices {
+
 //^ UPCOMING MOVIE MODEL HOME
 
   Future<MovieModel> getMovieModel() async {
@@ -29,62 +30,110 @@ class ApiServices {
       log("success upcoming Movies");
 
       return MovieModel.fromJson(jsonDecode(response.body));
-    }
-
-    throw Exception("faild to load upcoming movies !!!");
+    }else if (response.statusCode == 400) {
+    throw Exception("Bad Request");
+  } else if (response.statusCode == 401) {
+    throw Exception("Unauthorized");
+  } else if (response.statusCode == 403) {
+    throw Exception("Forbidden");
+  } else if (response.statusCode == 404) {
+    throw Exception("Not Found");
+  } else if (response.statusCode == 500) {
+    throw Exception("Internal Server Error");
+  } else if (response.statusCode == 503) {
+    throw Exception("Service Unavailable");
+  } else {
+    throw Exception("Failed to load upcoming movies: ${response.statusCode}.");
+  }
   }
 
 //^ TRENDING MOVIE MODEL( CAROUSEL ) HOME
 
-  Future<TrendingMovieModel> getTrendingModel() async {
-    endPoint = "trending/movie/day";
-    final url = "$baseUrl$endPoint$key";
+ Future<TrendingMovieModel> getTrendingModel() async {
+  endPoint = "trending/movie/day";
+  final url = "$baseUrl$endPoint$key";
 
-    final response = await http.get(Uri.parse(url));
+  final response = await http.get(Uri.parse(url));
 
-    if (response.statusCode == 200) {
-      log("success Trending");
-
-      return TrendingMovieModel.fromJson(jsonDecode(response.body));
-    }
-
-    throw Exception("faild to Trending !!!");
+  if (response.statusCode == 200) {
+    log("Success: Trending movies loaded");
+    return TrendingMovieModel.fromJson(jsonDecode(response.body));
+  } else if (response.statusCode == 400) {
+    throw Exception("Bad Request");
+  } else if (response.statusCode == 401) {
+    throw Exception("Unauthorized");
+  } else if (response.statusCode == 403) {
+    throw Exception("Forbidden");
+  } else if (response.statusCode == 404) {
+    throw Exception("Not Found");
+  } else if (response.statusCode == 500) {
+    throw Exception("Internal Server Error");
+  } else if (response.statusCode == 503) {
+    throw Exception("Service Unavailable");
+  } else {
+    throw Exception("Failed to load trending movies: ${response.statusCode}");
   }
+}
+
 
 //^ TOP RATED MODEL (HOME)
 
-  Future<TopRatedMovieModel> getTopRatedMovieModel() async {
-    endPoint = "movie/top_rated";
-    final url = "$baseUrl$endPoint$key";
+Future<TopRatedMovieModel> getTopRatedMovieModel() async {
+  endPoint = "movie/top_rated";
+  final url = "$baseUrl$endPoint$key";
 
-    final response = await http.get(Uri.parse(url));
+  final response = await http.get(Uri.parse(url));
 
-    if (response.statusCode == 200) {
-      log("success Top Rated");
-
-      return TopRatedMovieModel.fromJson(jsonDecode(response.body));
-    }
-
-    throw Exception("faild to Top Rated !!!");
+  if (response.statusCode == 200) {
+    log("Success: Top-rated movies loaded");
+    return TopRatedMovieModel.fromJson(jsonDecode(response.body));
+  } else if (response.statusCode == 400) {
+    throw Exception("Bad Request");
+  } else if (response.statusCode == 401) {
+    throw Exception("Unauthorized");
+  } else if (response.statusCode == 403) {
+    throw Exception("Forbidden");
+  } else if (response.statusCode == 404) {
+    throw Exception("Not Found");
+  } else if (response.statusCode == 500) {
+    throw Exception("Internal Server Error");
+  } else if (response.statusCode == 503) {
+    throw Exception("Service Unavailable");
+  } else {
+    throw Exception("Failed to load top-rated movies: ${response.statusCode}");
   }
+}
+
 
 
   //^ NOW PLAYING MODEL (HOME)
 
   Future<NowPlayingModel> getNowPlayingModel() async {
-    endPoint = "movie/now_playing";
-    final url = "$baseUrl$endPoint$key";
+  endPoint = "movie/now_playing";
+  final url = "$baseUrl$endPoint$key";
 
-    final response = await http.get(Uri.parse(url));
+  final response = await http.get(Uri.parse(url));
 
-    if (response.statusCode == 200) {
-      log("success Top Rated");
-
-      return NowPlayingModel.fromJson(jsonDecode(response.body));
-    }
-
-    throw Exception("faild to Top Rated !!!");
+  if (response.statusCode == 200) {
+    log("Success: Now Playing movies loaded");
+    return NowPlayingModel.fromJson(jsonDecode(response.body));
+  } else if (response.statusCode == 400) {
+    throw Exception("Bad Request");
+  } else if (response.statusCode == 401) {
+    throw Exception("Unauthorized");
+  } else if (response.statusCode == 403) {
+    throw Exception("Forbidden");
+  } else if (response.statusCode == 404) {
+    throw Exception("Not Found");
+  } else if (response.statusCode == 500) {
+    throw Exception("Internal Server Error");
+  } else if (response.statusCode == 503) {
+    throw Exception("Service Unavailable");
+  } else {
+    throw Exception("Failed to load now-playing movies: ${response.statusCode}");
   }
+}
+
 
 //^ SEARCH MOVIE MODEL SEARCH
 
@@ -116,7 +165,21 @@ class ApiServices {
       log('success Details Model');
       return MovieDetailModel.fromJson(jsonDecode(response.body));
     }
-    throw Exception('failed to load Details ');
+   else if (response.statusCode == 400) {
+    throw Exception("Bad Request");
+  } else if (response.statusCode == 401) {
+    throw Exception("Unauthorized");
+  } else if (response.statusCode == 403) {
+    throw Exception("Forbidden");
+  } else if (response.statusCode == 404) {
+    throw Exception("Not Found");
+  } else if (response.statusCode == 500) {
+    throw Exception("Internal Server Error");
+  } else if (response.statusCode == 503) {
+    throw Exception("Service Unavailable");
+  } else {
+    throw Exception("Failed to load now-playing movies: ${response.statusCode}");
+  }
   }
 
 
@@ -134,7 +197,21 @@ class ApiServices {
       return PopularMoviesModel.fromJson(jsonDecode(response.body));
     }
 
-    throw Exception("faild to Popular Movies !!!");
+    else if (response.statusCode == 400) {
+    throw Exception("Bad Request");
+  } else if (response.statusCode == 401) {
+    throw Exception("Unauthorized");
+  } else if (response.statusCode == 403) {
+    throw Exception("Forbidden");
+  } else if (response.statusCode == 404) {
+    throw Exception("Not Found");
+  } else if (response.statusCode == 500) {
+    throw Exception("Internal Server Error");
+  } else if (response.statusCode == 503) {
+    throw Exception("Service Unavailable");
+  } else {
+    throw Exception("Failed to load now-playing movies: ${response.statusCode}");
+  }
   }
 
 
@@ -150,27 +227,24 @@ class ApiServices {
       log("success  Movie Recommendations");
 
       return MovieRecommendationsModel.fromJson(jsonDecode(response.body));
-    }
-
-    throw Exception("faild to Movie Recommendations !!!");
+    }else if (response.statusCode == 400) {
+    throw Exception("Bad Request");
+  } else if (response.statusCode == 401) {
+    throw Exception("Unauthorized");
+  } else if (response.statusCode == 403) {
+    throw Exception("Forbidden");
+  } else if (response.statusCode == 404) {
+    throw Exception("Not Found");
+  } else if (response.statusCode == 500) {
+    throw Exception("Internal Server Error");
+  } else if (response.statusCode == 503) {
+    throw Exception("Service Unavailable");
+  } else {
+    throw Exception("Failed to load now-playing movies: ${response.statusCode}");
+  }
   }
 
 
-  // // //^ COMING SOON MODEL
 
-  // Future<ComingSoonModel> getComingSoon() async {
-  //   endPoint = 'tv/airing_today';
-  //   final url = "$baseUrl$endPoint$key";
-
-  //   final response = await http.get(Uri.parse(url));
-
-  //   if (response.statusCode == 200) {
-  //     log("success  Movie Recommendations");
-
-  //     return ComingSoonModel.fromJson(jsonDecode(response.body));
-  //   }
-
-  //   throw Exception("faild to Movie Recommendations !!!");
-  // }
 
 }
